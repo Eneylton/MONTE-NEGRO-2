@@ -251,7 +251,7 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
                             <?= $resultados ?>
                         </tbody>
                         <tr>
-                            <td class="direita qtd-40" colspan="7">
+                            <td class="direita qtd-40" colspan="8">
                                 <span>TOTAL DE ITENS PENDENTES PARA ENTREGA &nbsp;</span>
                             </td>
                             <td class="centro qtd-40 " colspan="1">
