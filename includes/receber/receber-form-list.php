@@ -137,7 +137,7 @@ foreach ($listar as $item) {
                         
                       
                       <a href="receber-item-cadastro.php?id_item=' . $item->id . '&qtd=' . $disponivel . '">
-                      <button ' . $disabled . ' type="button" class="btn btn-default" ><i class="fas fa-fa fa-motorcycle"></i> &nbsp; &nbsp; ENTREGADORES  </button>
+                      <button title="ALT + W" accesskey="w" ' . $disabled . ' type="button" class="btn btn-default" ><i class="fas fa-fa fa-motorcycle"></i> &nbsp; &nbsp; ENTREGADORES  </button>
                       </a>
                        &nbsp;
                        &nbsp;
@@ -162,7 +162,7 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
 
                 <div class="card back-black">
                     <div class="card-header">
-                        <button accesskey="q" title="ALT+K" type="submit" class="btn btn-warning" data-toggle="modal"
+                        <button accesskey="q" title="ALT+Q" type="submit" class="btn btn-warning" data-toggle="modal"
                             data-target="#modal-default"> <i class="fas fa-plus"></i> &nbsp; Novo</button>
                         <button <?= $block ?> accesskey="r" title="ALT+R" style="margin-left: 10px;" type="submit"
                             class="btn btn-success float-right" data-toggle="modal" data-target="#modal-data"> <i
@@ -180,7 +180,7 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
                             <table id="example" class="table table-dark table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: left; width:80px"> Nº </th>
+                                        <th style="text-align: left; width:80px"> CÓDIGO </th>
                                         <th> DATA</th>
                                         <th> CLIENTE </th>
                                         <th style="width: 300px;"> SETOR </th>
@@ -295,8 +295,7 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
 
 
                 <div class="modal-footer justify-content-between">
-                    <button title="ALT+W" accesskey="w" type="button" class="btn btn-danger"
-                        data-dismiss="modal">Fechar</button>
+                    <button title="ALT+W" type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                     <button title="ALT+S" accesskey="s" type="submit" class="btn btn-primary">Receber</button>
                 </div>
 

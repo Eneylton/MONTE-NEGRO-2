@@ -178,10 +178,10 @@ $usuario = $usuariologado ?
                     switch ($acesso) {
 
                       case '2':
-                        echo "";
+                        echo "nav-item d-none d-sm-inline-block";
                         break;
                       case '3':
-                        echo "";
+                        echo "nav-item d-none d-sm-inline-block";
                         break;
                       case '4':
                         echo "";
@@ -195,31 +195,6 @@ $usuario = $usuariologado ?
                     ?>" style="display: none;">
                     <a href="pages/retorno/retorno-list.php" class="nav-link">
                         <p>Devoluçoes</p>
-                    </a>
-                </li>
-
-                <li class="<?php
-
-                    switch ($acesso) {
-
-                      case '2':
-                        echo "";
-                        break;
-                      case '3':
-                        echo "";
-                        break;
-                      case '4':
-                        echo "";
-                        break;
-
-                      default:
-                        echo "nav-item d-none d-sm-inline-block";
-                        break;
-                    }
-
-                    ?>" style="display: none;">
-                    <a href="pages/retgaiola/retgaiola-list.php" class="nav-link">
-                        <p>Nova entrega</p>
                     </a>
                 </li>
 

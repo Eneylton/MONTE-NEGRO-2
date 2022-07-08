@@ -24,45 +24,45 @@ $grande = 0;
 
 foreach ($entregas as $item) {
 
-   switch ($item->servico_id) {
-      case '1':
-         $valor = $item->pequeno;
-         break;
-      case '3':
-         $valor = $item->boleto;
-         break;
-      case '4':
-         $valor = $item->cartao;
-         break;
+    switch ($item->servico_id) {
+        case '1':
+            $valor = $item->pequeno;
+            break;
+        case '3':
+            $valor = $item->boleto;
+            break;
+        case '4':
+            $valor = $item->cartao;
+            break;
 
-      default:
-         $valor = $item->grande;
-         break;
-   }
+        default:
+            $valor = $item->grande;
+            break;
+    }
 
-   $codigo = $item->entregadores_id;
+    $codigo = $item->entregadores_id;
 
-   if ($item->qtd != null) {
+    if ($item->qtd != null) {
 
-      $sub_total = $item->qtd;
-   } else {
-      $item->qtd = "nenhuma";
-   }
-
-
-
-   $id = $item->id;
+        $sub_total = $item->qtd;
+    } else {
+        $item->qtd = "nenhuma";
+    }
 
 
-   $sub =  $sub_total *  $valor;
 
-   $calc += $sub;
+    $id = $item->id;
 
-   $bruto += $sub_total;
 
-   $saldo = $valor;
+    $sub =  $sub_total *  $valor;
 
-   $resultados .= '<tr>
+    $calc += $sub;
+
+    $bruto += $sub_total;
+
+    $saldo = $valor;
+
+    $resultados .= '<tr>
                      
                      
                       <td style="text-transform:uppercase">' .  date('d/m/Y', strtotime($item->data)) . '</td>
@@ -85,29 +85,29 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
 
 foreach ($devolucoes as $item) {
 
-   $codigo = $item->apelido;
+    $codigo = $item->apelido;
 
-   $id = $item->id;
+    $id = $item->id;
 
-   switch ($item->servico_id) {
-      case '1':
-         $valor = $item->pequeno;
-         break;
-      case '3':
-         $valor = $item->boleto;
-         break;
-      case '4':
-         $valor = $item->cartao;
-         break;
+    switch ($item->servico_id) {
+        case '1':
+            $valor = $item->pequeno;
+            break;
+        case '3':
+            $valor = $item->boleto;
+            break;
+        case '4':
+            $valor = $item->cartao;
+            break;
 
-      default:
-         $valor = $item->grande;
-         break;
-   }
+        default:
+            $valor = $item->grande;
+            break;
+    }
 
-   $sub_dev += $item->qtd;
+    $sub_dev += $item->qtd;
 
-   $resultados2 .= '<tr>
+    $resultados2 .= '<tr>
                                                                         
         
          <td style="text-transform:uppercase">' .  date('d/m/Y', strtotime($item->data)) . '</td>
@@ -288,7 +288,7 @@ $resultados2 = strlen($resultados2) ? $resultados2 : '<tr>
                     <div class="card-body">
                         <div class="d-flex">
                             <p class="d-flex flex-column">
-                                <span class="text-bold text-lg">R$ <?= number_format($saldo, "2", ",", ".") ?></span>
+                                <span class="text-bold text-lg">R$ <?= number_format($calc, "2", ",", ".") ?></span>
                                 <span>Acumulado do dia</span>
                             </p>
                             <p class="ml-auto d-flex flex-column text-right">
@@ -298,7 +298,7 @@ $resultados2 = strlen($resultados2) ? $resultados2 : '<tr>
                                         <i class="fas fa-arrow-down"></i> &nbsp; Devoluções <?= $bruto_dev ?>
                                     </span>
                                 </span>
-                                <span class="text-muted">Acumulado do dia </span>
+                                <span class="text-muted">Entrega / Devoluções</span>
                             </p>
                         </div>
                         <!-- /.d-flex -->
@@ -348,13 +348,14 @@ $resultados2 = strlen($resultados2) ? $resultados2 : '<tr>
 
                             <div class="col-lg-6 col-6">
                                 <input class="form-control" type="date" value="<?php date_default_timezone_set('America/Sao_Paulo');
-                                                                        echo date('Y-m-d') ?>" name="dataInicio">
+                                                                                echo date('Y-m-d') ?>"
+                                    name="dataInicio">
                             </div>
 
 
                             <div class="col-lg-6 col-6">
                                 <input class="form-control" type="date" value="<?php date_default_timezone_set('America/Sao_Paulo');
-                                                                        echo date('Y-m-d') ?>" name="dataFim">
+                                                                                echo date('Y-m-d') ?>" name="dataFim">
                             </div>
                         </div>
                     </div>

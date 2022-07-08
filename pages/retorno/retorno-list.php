@@ -14,8 +14,23 @@ define('BRAND', 'Devoluções');
 
 Login::requireLogin();
 
+$usuariologado = Login::getUsuarioLogado();
+
+$usuario = $usuariologado['id'];
+$user_acesso = $usuariologado['acessos_id'];
+
 
 $buscar = filter_input(INPUT_GET, 'buscar', FILTER_UNSAFE_RAW);
+
+
+if ($buscar == null) {
+
+    $and = "";
+} else {
+
+    $and = " AND";
+}
+
 
 $condicoes = [
     strlen($buscar) ? 'e.apelido LIKE "%' . str_replace(' ', '%', $buscar) . '%" 
@@ -23,6 +38,8 @@ $condicoes = [
     o.nome LIKE "%' . str_replace(' ', '%', $buscar) . '%"
     or 
     t.nome LIKE "%' . str_replace(' ', '%', $buscar) . '%"
+    or 
+    rc.id LIKE "%' . str_replace(' ', '%', $buscar) . '%"
     or 
     g.nome LIKE "%' . str_replace(' ', '%', $buscar) . '%"' : null
 ];
@@ -35,37 +52,74 @@ $qtd = Retorno::getQtd($where);
 
 $pagination = new Pagination($qtd, $_GET['pagina'] ?? 1, 50);
 
-$listar = Retorno::getList(
-    '   
-r.id AS id,
-r.data AS data,
-r.status AS status,
-r.qtd AS qtd,
-e.apelido AS apelido,
-r.entregadores_id AS entregadores_id,
-r.ocorrencias_id AS ocorrencias_id,
-r.producao_id AS producao_id,
-o.nome AS ocorrencia,
-t.nome AS tipo,
-g.id AS gaiolas_id,
-g.nome AS gaiolas',
-    ' retorno AS r
-INNER JOIN
-producao AS p ON (r.producao_id = p.id)
-INNER JOIN
-receber AS rc ON (p.receber_id = rc.id)
-INNER JOIN
-gaiolas AS g ON (rc.gaiolas_id = g.id)
-INNER JOIN
-entregadores AS e ON (r.entregadores_id = e.id)
-INNER JOIN
-ocorrencias AS o ON (r.ocorrencias_id = o.id)
-INNER JOIN
-tipo AS t ON (r.tipo_id = t.id)',
-    $where . ' r.status = 0 ',
-    'r.data desc',
-    $pagination->getLimit()
-);
+if ($user_acesso == 1) {
+
+    $listar = Retorno::getList(
+        '   
+    r.id AS id,
+    rc.id AS receber_id,
+    r.data AS data,
+    r.status AS status,
+    r.qtd AS qtd,
+    e.apelido AS apelido,
+    r.entregadores_id AS entregadores_id,
+    r.ocorrencias_id AS ocorrencias_id,
+    r.producao_id AS producao_id,
+    o.nome AS ocorrencia,
+    t.nome AS tipo,
+    g.id AS gaiolas_id,
+    g.nome AS gaiolas',
+        ' retorno AS r
+    INNER JOIN
+    producao AS p ON (r.producao_id = p.id)
+    INNER JOIN
+    receber AS rc ON (p.receber_id = rc.id)
+    INNER JOIN
+    gaiolas AS g ON (rc.gaiolas_id = g.id)
+    INNER JOIN
+    entregadores AS e ON (r.entregadores_id = e.id)
+    INNER JOIN
+    ocorrencias AS o ON (r.ocorrencias_id = o.id)
+    INNER JOIN
+    tipo AS t ON (r.tipo_id = t.id)',
+        $where . $and . ' r.status = 0 ',
+        'r.data desc',
+        $pagination->getLimit()
+    );
+} else {
+
+    $listar = Retorno::getList(
+        '   
+    r.id AS id,
+    r.data AS data,
+    r.status AS status,
+    r.qtd AS qtd,
+    e.apelido AS apelido,
+    r.entregadores_id AS entregadores_id,
+    r.ocorrencias_id AS ocorrencias_id,
+    r.producao_id AS producao_id,
+    o.nome AS ocorrencia,
+    t.nome AS tipo,
+    g.id AS gaiolas_id,
+    g.nome AS gaiolas',
+        ' retorno AS r
+    INNER JOIN
+    producao AS p ON (r.producao_id = p.id)
+    INNER JOIN
+    receber AS rc ON (p.receber_id = rc.id)
+    INNER JOIN
+    gaiolas AS g ON (rc.gaiolas_id = g.id)
+    INNER JOIN
+    entregadores AS e ON (r.entregadores_id = e.id)
+    INNER JOIN
+    ocorrencias AS o ON (r.ocorrencias_id = o.id)
+    INNER JOIN
+    tipo AS t ON (r.tipo_id = t.id)',
+        $where . $and . ' r.status = 0 AND rc.usuarios_id=' . $usuario,
+        'r.data desc',
+        $pagination->getLimit()
+    );
+}
 
 $entregadores = Entregador::getList('*', 'entregadores', null, 'apelido ASC');
 $ocorrencias = Ocorrencia::getList('*', 'ocorrencias', null, 'nome ASC');

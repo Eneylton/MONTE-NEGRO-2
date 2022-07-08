@@ -42,7 +42,7 @@ foreach ($listar as $item) {
                       <td style="display:none">' . $item->entregadores_id . '</td>
                       <td style="display:none">' . $item->producao_id . '</td>
 
-                      <td>' . $item->id . '</td>
+                      <td><h5><span class="badge badge-pill badge-primary">' . $item->receber_id . '</span></h5></td>
                       <td style="text-transform:uppercase">' . date('d/m/Y  Á\S  H:i:s', strtotime($item->data)) . '</td>
                       <td style="text-transform:uppercase"> <h5><span class="badge badge-pill badge-light"> <i class="fa fa-motorcycle" aria-hidden="true"></i> &nbsp;' . $item->apelido . '</span></h5> </td>
                       <td style="text-transform:uppercase"> <h5><span class="badge badge-pill badge-danger">' . $item->ocorrencia . '</span></h5></td>

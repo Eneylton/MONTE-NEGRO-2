@@ -68,7 +68,7 @@ $resultados = '';
                         &nbsp;
                         &nbsp;
                         <a href="../producao/producao-list.php">
-                            <button accesskey="q" title="ALT+K" type="submit" class="btn btn-danger" data-toggle="modal"
+                            <button accesskey="p" title="ALT+P" type="submit" class="btn btn-danger" data-toggle="modal"
                                 data-target="#modal-default"> <i style="font-size: 27px;" class="fa fa-truck"
                                     aria-hidden="true"></i> &nbsp;
                                 <span style="font-size: 27px;">PRODUÇÃO</span></button>

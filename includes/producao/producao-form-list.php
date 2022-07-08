@@ -179,7 +179,8 @@ foreach ($listar as $item) {
 
 
     $resultados .= '<tr>  
-                      <td>' . $item->id . '</td>
+                
+                      <td><h5><span class="badge badge-pill badge-primary">' . $item->receber_id . '</span></h5></td>
                       <td style="text-transform:uppercase">' . date('d/m/Y  Á\S  H:i:s', strtotime($item->data)) . '</td>
                       <td>
                       <h4>
@@ -211,7 +212,7 @@ foreach ($listar as $item) {
 }
 
 $resultados = strlen($resultados) ? $resultados : '<tr>
-                                                     <td colspan="9" class="text-center" > Nenhuma produção até o momento !!!!! </td>
+                                                     <td colspan="10" class="text-center" > Nenhuma produção até o momento !!!!! </td>
                                                      </tr>';
 
 ?>
@@ -234,7 +235,8 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
                         <thead>
 
                             <tr>
-                                <th> Nº </th>
+
+                                <th> CÓDIGO</th>
                                 <th> DATA </th>
                                 <th style="text-align: center;"> PRAZO DE ENTREGA </th>
                                 <th> CLIENTES </th>
@@ -316,7 +318,7 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
                             <div class="form-group">
                                 <label>Quantidade entregue</label>
                                 <input style="text-transform: uppercase;" type="text" class="form-control" name="qtd"
-                                    required autofocus>
+                                    autofocus required>
                             </div>
 
                         </div>
@@ -377,7 +379,7 @@ $resultados = strlen($resultados) ? $resultados : '<tr>
                             <div class="form-group">
                                 <label>Quantidade devolvida</label>
                                 <input style="text-transform: uppercase;" type="text" class="form-control" name="qtd"
-                                    required>
+                                    autofocus required>
                             </div>
 
                         </div>

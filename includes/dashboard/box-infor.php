@@ -75,7 +75,7 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                   <div class="inner">
-                      <h3><?= $ocorrencias_key ?><sup style="font-size: 20px">% &nbsp;&nbsp;</sup><i
+                      <h3><?= $ocorrencias_key ?><sup style="font-size: 20px"> &nbsp;&nbsp;</sup><i
                               class="ion ion-android-car"></i>
                       </h3>
 

@@ -19,6 +19,7 @@ $usuariologado = Login::getUsuarioLogado();
 $acesso = $usuariologado['acessos_id'];
 
 $usuario = $usuariologado['id'];
+$user_acesso = $usuariologado['acessos_id'];
 
 
 if (isset($_GET['acao'])) {
@@ -69,7 +70,27 @@ if (isset($_POST['id'])) {
     }
 }
 
-$listar = Receber::getList('r.id AS id,
+if ($user_acesso == 1) {
+
+    $listar = Receber::getList('r.id AS id,
+r.data AS data,
+r.qtd AS qtd,
+r.clientes_id AS clientes_id,
+r.disponivel AS disponivel,
+c.nome AS cliente,
+g.nome as baias,
+st.nome AS setores,
+s.nome AS servicos ', ' receber AS r
+INNER JOIN
+clientes AS c ON (r.clientes_id = c.id)
+INNER JOIN
+gaiolas AS g ON (r.gaiolas_id = g.id)
+INNER JOIN
+setores AS st ON (r.setores_id = st.id)
+INNER JOIN
+servicos AS s ON (r.servicos_id = s.id)', null, 'r.id DESC LIMIT 50', null);
+} else {
+    $listar = Receber::getList('r.id AS id,
 r.data AS data,
 r.qtd AS qtd,
 r.clientes_id AS clientes_id,
@@ -86,6 +107,7 @@ INNER JOIN
 setores AS st ON (r.setores_id = st.id)
 INNER JOIN
 servicos AS s ON (r.servicos_id = s.id)', 'r.usuarios_id=' . $usuario, 'r.id DESC LIMIT 50', null);
+}
 
 $clientes = Cliente::getList('*', 'clientes');
 $baias    = Gaiola::getList('*', 'gaiolas', null, 'nome ASC');
